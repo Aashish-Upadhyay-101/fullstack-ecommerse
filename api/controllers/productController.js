@@ -33,6 +33,10 @@ exports.getProductByCategory = catchAsyncError(async (req, res) => {
 exports.getSingleProduct = catchAsyncError(async (req, res) => {
   const product = await Product.findById(req.params.id);
 
+  if (!product) {
+    return next(new AppError("No products found", 404));
+  }
+
   res.status(200).json({
     status: "success",
     product,
@@ -54,6 +58,10 @@ exports.updateProduct = catchAsyncError(async (req, res) => {
     runValidators: true,
   });
 
+  if (!product) {
+    return next(new AppError("No products found", 404));
+  }
+
   res.status(200).json({
     status: "success",
     product,
@@ -61,7 +69,11 @@ exports.updateProduct = catchAsyncError(async (req, res) => {
 });
 
 exports.deleteProduct = catchAsyncError(async (req, res) => {
-  await Product.findByIdAndDelete(req.params.id);
+  const product = await Product.findByIdAndDelete(req.params.id);
+
+  if (!product) {
+    return next(new AppError("No products found", 404));
+  }
 
   res.status(200).json({
     status: "success",
