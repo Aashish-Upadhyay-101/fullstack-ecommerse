@@ -1,6 +1,7 @@
 const express = require("express");
 const authController = require("../controllers/authController");
 const userController = require("../controllers/userController");
+const cartController = require("../controllers/cartController");
 
 const router = express.Router();
 
@@ -23,5 +24,13 @@ router
 
 // to display your profile
 router.get("/myprofile", userController.getMe);
+
+// add to cart
+router.get("/cart", cartController.getUserCart);
+router.get(
+  "/allcart",
+  authController.restrictUser("super-user"),
+  cartController.getAllCart
+);
 
 module.exports = router;

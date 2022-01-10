@@ -2,58 +2,64 @@ const mongoose = require("mongoose");
 const validator = require("validator");
 const bcrypt = require("bcryptjs");
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    trim: true,
-    required: [true, "A user must have a name"],
-    minlength: [3, "Name must be more than 3 letters"],
-    maxlength: [30, "Name must be less than 30 letters"],
-  },
+const userSchema = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      trim: true,
+      required: [true, "A user must have a name"],
+      minlength: [3, "Name must be more than 3 letters"],
+      maxlength: [30, "Name must be less than 30 letters"],
+    },
 
-  email: {
-    type: String,
-    unique: true,
-    lowercase: true,
-    required: [true, "A user must have an email address"],
-    validate: [validator.isEmail, "Please enter valid email address"],
-  },
+    email: {
+      type: String,
+      unique: true,
+      lowercase: true,
+      required: [true, "A user must have an email address"],
+      validate: [validator.isEmail, "Please enter valid email address"],
+    },
 
-  photo: String,
+    photo: String,
 
-  role: {
-    type: String,
-    enum: ["buyer", "seller", "super-user"],
-    default: "buyer",
-  },
+    role: {
+      type: String,
+      enum: ["buyer", "seller", "super-user"],
+      default: "buyer",
+    },
 
-  password: {
-    type: String,
-    required: [true, "Please provide a password"],
-    minlength: 6,
-    select: false,
-  },
+    password: {
+      type: String,
+      required: [true, "Please provide a password"],
+      minlength: 6,
+      select: false,
+    },
 
-  confirmPassword: {
-    type: String,
-    required: [true, "Please confirm your password"],
-    validate: {
-      validator: function (val) {
-        return this.password === val;
+    confirmPassword: {
+      type: String,
+      required: [true, "Please confirm your password"],
+      validate: {
+        validator: function (val) {
+          return this.password === val;
+        },
+        message: "Confirm passworld didn't match",
       },
-      message: "Confirm passworld didn't match",
+    },
+
+    passwordChangedAt: Date,
+
+    // updated code
+    active: {
+      type: Boolean,
+      default: true,
+      select: false,
     },
   },
-
-  passwordChangedAt: Date,
-
-  // updated code
-  active: {
-    type: Boolean,
-    default: true,
-    select: false,
-  },
-});
+  {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true },
+  }
+);
 
 // updated code
 userSchema.pre(/^find/, function (next) {

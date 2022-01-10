@@ -1,6 +1,7 @@
 const express = require("express");
 const productController = require("../controllers/productController");
 const authController = require("../controllers/authController");
+const cartController = require("../controllers/cartController");
 
 const router = express.Router();
 
@@ -28,5 +29,12 @@ router
     authController.restrictUser("seller", "super-user"),
     productController.deleteProduct
   );
+
+// add to cart
+router.post(
+  "/one/:id/addtocart",
+  authController.protected,
+  cartController.addCartItem
+);
 
 module.exports = router;

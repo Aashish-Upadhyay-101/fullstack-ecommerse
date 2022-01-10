@@ -1,5 +1,5 @@
 const express = require("express");
-const { Error } = require("mongoose");
+const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
 const mongoSanitize = require("express-mongo-sanitize");
@@ -20,6 +20,7 @@ const userRoute = require("./routes/userRoute");
 
 const app = express();
 
+app.use(morgan("dev"));
 app.use(helmet());
 app.use(express.json({ limit: "10kb" }));
 
