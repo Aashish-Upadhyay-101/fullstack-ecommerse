@@ -10,7 +10,9 @@ router
   .get(productController.getProducts)
   .post(
     authController.protected,
-    authController.restrictUser("seller", "super-user"),
+    authController.restrictUser("seller", "super-user", "buyer"),
+    productController.uploadProductImage,
+    productController.resizeImage,
     productController.createProduct
   );
 
@@ -21,12 +23,14 @@ router
   .get(productController.getSingleProduct)
   .patch(
     authController.protected,
-    authController.restrictUser("seller", "super-user"),
+    authController.restrictUser("seller", "super-user", "buyer"),
+    productController.uploadProductImage,
+    productController.resizeImage,
     productController.updateProduct
   )
   .delete(
     authController.protected,
-    authController.restrictUser("seller", "super-user"),
+    authController.restrictUser("seller", "super-user", "buyer"),
     productController.deleteProduct
   );
 

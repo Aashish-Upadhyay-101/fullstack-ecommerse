@@ -46,12 +46,6 @@ const productSchema = new mongoose.Schema(
   }
 );
 
-productSchema.pre(/^find/, function (next) {
-  this.quantity = undefined;
-
-  next();
-});
-
 const Product = mongoose.model("Product", productSchema);
 
 module.exports = Product;
