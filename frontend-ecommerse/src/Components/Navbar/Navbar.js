@@ -26,7 +26,10 @@ const Navbar = () => {
           <p>Login</p>
         </li>
         <li className="nav-item">
-          <ion-icon name="cart-outline" id="icon"></ion-icon>
+          <div>
+            <ion-icon name="cart-outline" id="icon"></ion-icon>
+            <span className="cart-item-count">5</span>
+          </div>
           <p>Cart</p>
         </li>
       </div>
