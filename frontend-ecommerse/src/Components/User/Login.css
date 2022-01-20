@@ -1,0 +1,89 @@
+.section-login {
+  padding: 7.2rem 0;
+}
+
+.login {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 0 2.4rem;
+}
+
+.logo {
+  height: 6.4rem;
+  width: 6.4rem;
+  margin-bottom: 4.2rem;
+}
+
+.login-text {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 3.8rem;
+}
+
+.login-form-input {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  margin-bottom: 3rem;
+}
+
+.login-form label {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #555;
+}
+
+.login-input {
+  height: 4.6rem;
+  outline: none;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 100px;
+  padding: 0 2.4rem;
+  font-size: 1.8rem;
+  color: #666;
+  display: flex;
+  align-items: center;
+}
+
+.login-input::placeholder {
+  font-size: 1.4rem;
+  color: #999;
+  vertical-align: middle;
+}
+
+.form-extra {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3.8rem;
+}
+
+.checkbox input {
+  color: rebeccapurple;
+}
+
+.remember-me {
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  position: relative;
+}
+
+.forget-password {
+  font-size: 1.4rem;
+  text-decoration: none;
+  color: #9d4edd;
+}
+
+.login-btn {
+  width: 100%;
+  margin-bottom: 3.2rem;
+}
+
+.create-account {
+  margin-left: 4px;
+}
+
+.checkbox {
+  height: 1.8rem;
+  width: 1.8rem;
+}

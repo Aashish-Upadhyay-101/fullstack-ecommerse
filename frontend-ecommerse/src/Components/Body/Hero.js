@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import hero from "../../assets/images/hero.jpeg";
 import "./Hero.css";
 
@@ -16,9 +17,9 @@ const Hero = () => {
             in discounted prices.
           </p>
 
-          <a className="btn btn-filled" href="#">
+          <Link className="btn btn-filled" to="/signup">
             Get started
-          </a>
+          </Link>
           <span className="btn explore">Explore more &#8595;</span>
         </div>
         <img

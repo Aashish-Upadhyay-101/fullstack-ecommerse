@@ -13,11 +13,14 @@ spacing size:
   padding: 0;
   box-sizing: border-box;
   font-family: "Inter", sans-serif;
-  color: #240046;
 }
 
 html {
   font-size: 62.5%;
+}
+
+body {
+  color: #240046;
 }
 
 .container {
@@ -41,6 +44,12 @@ html {
   margin-bottom: 3.8rem;
 }
 
+.turtary-heading {
+  font-size: 2.4rem;
+  font-weight: 600;
+  margin-bottom: 1.8rem;
+}
+
 .btn,
 .btn:link,
 .btn:visited {
@@ -51,8 +60,11 @@ html {
   font-size: 2rem;
   border-radius: 100px;
   transition: all 0.3s;
+  border: none;
+  outline: none;
 }
 
+.btn-filled,
 .btn-filled:link,
 .btn-filled:visited {
   background-color: #9d4edd;
@@ -62,4 +74,9 @@ html {
 .btn-filled:hover,
 .btn-filled:active {
   background-color: #7b2cbf;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #240046;
 }

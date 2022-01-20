@@ -1,4 +1,5 @@
 const express = require("express");
+// const cors = require("cors");
 const morgan = require("morgan");
 const rateLimit = require("express-rate-limit");
 const helmet = require("helmet");
@@ -19,6 +20,8 @@ const productRoute = require("./routes/productRoute");
 const userRoute = require("./routes/userRoute");
 
 const app = express();
+
+// app.use(cors());
 
 app.use(morgan("dev"));
 app.use(helmet());

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import logo from "../../assets/images/tinder.png";
 import "./Navbar.css";
 
@@ -6,10 +7,16 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-left">
-        <img className="navbar-logo" src={logo} alt="Logo ezon shopping site" />
+        <Link to="/">
+          <img
+            className="navbar-logo"
+            src={logo}
+            alt="Logo ezon shopping site"
+          />
+        </Link>
         <li className="nav-item">
           <ion-icon name="git-network-outline" id="icon"></ion-icon>
-          <p>Services</p>
+          <p>Hello, guest</p>
         </li>
       </div>
       <div className="navbar-center">
@@ -23,7 +30,9 @@ const Navbar = () => {
         </li>
         <li className="nav-item">
           <ion-icon name="person-outline" id="icon"></ion-icon>
-          <p>Login</p>
+          <Link className="nav-link" to="/login">
+            Login
+          </Link>
         </li>
         <li className="nav-item">
           <div>
