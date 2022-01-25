@@ -74,9 +74,20 @@ body {
 .btn-filled:hover,
 .btn-filled:active {
   background-color: #7b2cbf;
+  cursor: pointer;
 }
 
 .nav-link {
   text-decoration: none;
   color: #240046;
+}
+
+.btn-remove {
+  color: #fff;
+  background-color: rgb(197, 40, 12);
+}
+
+.btn-remove:hover {
+  background-color: rgb(163, 37, 15);
+  cursor: pointer;
 }

@@ -12,6 +12,15 @@ exports.getAllUsers = catchAsyncError(async (req, res, next) => {
   });
 });
 
+// exports.getCurrentUserById = catchAsyncError(async (req, res, next) => {
+//   const user = await User.find({ _id: req.body._id });
+
+//   res.status(200).json({
+//     status: "success",
+//     user,
+//   });
+// });
+
 exports.getMe = catchAsyncError(async (req, res, next) => {
   const user = await User.findById(req.user._id);
 

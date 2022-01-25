@@ -23,6 +23,7 @@ const Products = () => {
     }
     fetchProduct();
   }, [categroyTitle]);
+
   return (
     <section className="products">
       <div className="container">

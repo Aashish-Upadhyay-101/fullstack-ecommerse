@@ -23,6 +23,14 @@ exports.addCartItem = catchAsyncError(async (req, res, next) => {
   });
 });
 
+exports.deleteCartItem = catchAsyncError(async (req, res, next) => {
+  const cart = await Cart.findByIdAndDelete(req.body.id);
+
+  res.status(200).json({
+    status: "success",
+  });
+});
+
 exports.getAllCart = catchAsyncError(async (req, res, next) => {
   const cart = await Cart.find();
 

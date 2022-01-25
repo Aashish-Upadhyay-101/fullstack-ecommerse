@@ -5,7 +5,7 @@ import image from "../../assets/images/hero.jpeg";
 const ProductItem = ({ name, price, id }) => {
   const params = useParams();
 
-  const link = `/category/${params.categroy}/${id}`;
+  const link = `/category/${params.category}/${id}`;
 
   return (
     <Link className="nav-link" to={link}>

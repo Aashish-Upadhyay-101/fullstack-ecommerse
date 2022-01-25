@@ -2,11 +2,14 @@ const express = require("express");
 const authController = require("../controllers/authController");
 const userController = require("../controllers/userController");
 const cartController = require("../controllers/cartController");
+const { route } = require("./productRoute");
 
 const router = express.Router();
 
 router.post("/signup", authController.signup);
 router.post("/login", authController.login);
+
+// router.post("/getuserfromcookie", userController.getCurrentUserById); // get user from cookie
 
 // below this all need to begin login to the action
 router.use(authController.protected);
@@ -32,5 +35,8 @@ router.get(
   authController.restrictUser("super-user"),
   cartController.getAllCart
 );
+
+// remove from cart
+router.post("/removefromcart", cartController.deleteCartItem);
 
 module.exports = router;

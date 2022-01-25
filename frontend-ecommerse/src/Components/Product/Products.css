@@ -73,6 +73,24 @@
   margin-bottom: 3.2rem;
 }
 
+.price-quantity {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 4.8rem;
+}
+
+.quantity-number {
+  height: 2.4rem;
+  width: 4.8rem;
+}
+
+.quantity-label {
+  font-size: 1.4rem;
+  margin-left: 1.2rem;
+}
+
 .add-to-cart {
   margin-top: 1.8rem;
+  margin-bottom: 2.4rem;
 }
