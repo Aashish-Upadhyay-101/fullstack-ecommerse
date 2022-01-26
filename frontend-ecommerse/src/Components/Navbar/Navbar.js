@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import UserContext from "../../store/auth-context";
-import CartContext from "../../store/cart-context";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/tinder.png";
 import "./Navbar.css";

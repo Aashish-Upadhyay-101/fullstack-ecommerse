@@ -5,12 +5,10 @@ import UserContext from "../../store/auth-context";
 import "./Products.css";
 import productImage from "../../assets/images/electronics.jpeg";
 import axios from "axios";
-import CartContext from "../../store/cart-context";
 
 const ProductDetails = (props) => {
   const params = useParams();
   const userContext = useContext(UserContext);
-  const cartContext = useContext(CartContext);
   const [product, setProduct] = useState({});
   const [quantity, setQuantity] = useState(1);
 
@@ -46,8 +44,6 @@ const ProductDetails = (props) => {
             quantity,
           },
         });
-        // item added message
-        // cartContext.addItem(response.data.cart);
       }
     } catch (e) {
       console.log(e.message);

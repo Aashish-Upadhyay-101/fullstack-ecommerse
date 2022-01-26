@@ -1,6 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useContext, useState } from "react";
-import UserContext from "../store/auth-context";
+import { useState } from "react";
 import Navbar from "./Navbar/Navbar";
 import "./App.css";
 import Hero from "./Body/Hero";
@@ -16,8 +15,6 @@ import Cart from "./Cart/Cart";
 import { useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
-import CartProvider from "../store/CartProvider";
-import CartContext from "../store/cart-context";
 
 function App(props) {
   // const userContext = useContext(UserContext);
@@ -41,52 +38,50 @@ function App(props) {
   return (
     <div className="app">
       <AuthProvider>
-        <CartProvider>
-          <Routes>
-            <Route
-              path="/"
-              element={
-                <>
-                  <Navbar />
-                  <Hero />
-                  <Category />
-                </>
-              }
-            />
-            <Route
-              path="/category/:category"
-              element={
-                <>
-                  <Navbar />
-                  <Products />
-                </>
-              }
-            />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <>
+                <Navbar />
+                <Hero />
+                <Category />
+              </>
+            }
+          />
+          <Route
+            path="/category/:category"
+            element={
+              <>
+                <Navbar />
+                <Products />
+              </>
+            }
+          />
 
-            <Route
-              path="/category/:categroy/:productId"
-              element={
-                <>
-                  <Navbar />
-                  <ProductDetails />
-                </>
-              }
-            />
+          <Route
+            path="/category/:categroy/:productId"
+            element={
+              <>
+                <Navbar />
+                <ProductDetails />
+              </>
+            }
+          />
 
-            <Route path="/login" element={<Login />} />
-            <Route path="/logout" element={<Logout />} />
-            <Route path="/signup" element={<Signup />} />
-            <Route path="/cart" element={<Cart />} />
-            <Route
-              path="*"
-              element={
-                <>
-                  <Navbar /> <Error />
-                </>
-              }
-            />
-          </Routes>
-        </CartProvider>
+          <Route path="/login" element={<Login />} />
+          <Route path="/logout" element={<Logout />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route
+            path="*"
+            element={
+              <>
+                <Navbar /> <Error />
+              </>
+            }
+          />
+        </Routes>
       </AuthProvider>
     </div>
   );

@@ -1,7 +1,6 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useContext, useEffect, useState } from "react";
-import LoadingScreen from "react-loading-screen";
 import { Link } from "react-router-dom";
 import image from "../../assets/images/electronics.jpeg";
 import logo from "../../assets/images/tinder.png";
