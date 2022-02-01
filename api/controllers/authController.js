@@ -16,7 +16,7 @@ const createAccessToken = (user, statusCode, res) => {
   const token = createJWT(user._id);
 
   // save cookie in the browser cookie
-  res.cookie("jwt", token, {
+  res.cookie("jwt-token", token, {
     expires: new Date(
       Date.now() + process.env.JWT_COOKIE_EXPIRES_IN * 24 * 60 * 60 * 1000
     ),
@@ -81,7 +81,8 @@ exports.protected = catchAsyncError(async (req, res, next) => {
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
-    token = req.headers.authorization.split(" ")[1];
+    token_index = req.headers.authorization.split(" ").length - 1;
+    token = req.headers.authorization.split(" ")[token_index];
   }
 
   if (!token) {

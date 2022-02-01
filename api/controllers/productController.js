@@ -26,8 +26,8 @@ exports.resizeImage = (req, res, next) => {
 
   const fileExt = req.file.mimetype.split("/")[1];
 
-  req.file.filename = `${req.user.name}-${
-    req.user._id
+  req.file.filename = `${req.user._id}-${
+    req.params.id
   }-${Date.now()}.${fileExt}`;
 
   sharp(req.file.buffer)

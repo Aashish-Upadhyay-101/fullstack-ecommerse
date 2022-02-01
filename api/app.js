@@ -18,10 +18,16 @@ const AppError = require("./utils/appError");
 
 const productRoute = require("./routes/productRoute");
 const userRoute = require("./routes/userRoute");
+const orderRoute = require("./routes/orderRoute");
 
 const app = express();
 
-app.use("*", cors());
+app.use(express.static(`${__dirname}/uploads/products`));
+
+console.log(`${__dirname}/uploads/products`);
+
+app.use(cors());
+app.options("*", cors());
 
 app.use(morgan("dev"));
 app.use(helmet());
@@ -35,6 +41,7 @@ app.use("/api/v1/user/login", limiter);
 
 app.use("/api/v1/product", productRoute);
 app.use("/api/v1/user", userRoute);
+app.use("/api/v1/order", orderRoute);
 
 app.all("*", (req, res, next) => {
   next(new AppError(`Can't find the ${req.originalUrl}`, 404));

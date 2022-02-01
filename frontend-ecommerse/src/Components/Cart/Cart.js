@@ -2,19 +2,22 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import image from "../../assets/images/electronics.jpeg";
 import logo from "../../assets/images/tinder.png";
 import UserContext from "../../store/auth-context";
 import "./Cart.css";
 
-const CartItem = ({ name, quantity, price, id, removeCart }) => {
+import { loadStripe } from "@stripe/stripe-js";
+
+const CartItem = ({ name, quantity, price, id, removeCart, image }) => {
   const removeFromCartHandler = () => {
     removeCart(id);
   };
 
+  const cart_image = `http://localhost:8000/${image}`;
+
   return (
     <figure className="cart">
-      <img src={image} className="cart-image" alt="baby image" />
+      <img src={cart_image} className="cart-image" alt="baby image" />
       <div className="cart-details">
         <h3 className="turtary-heading">{name}</h3>
         <p className="quantity">
@@ -40,6 +43,7 @@ const CartItem = ({ name, quantity, price, id, removeCart }) => {
 const Cart = () => {
   let [cart, setCart] = useState([]);
   const userContext = useContext(UserContext);
+  const [checkout, setCheckout] = useState(false);
 
   useEffect(() => {
     async function fetchCart() {
@@ -65,6 +69,33 @@ const Cart = () => {
 
   grandTotal = grandTotal.toFixed(2);
 
+  const checkoutHandler = async (e) => {
+    setCheckout(true);
+
+    try {
+      const stripe = await loadStripe(
+        "pk_test_51KLszlAOCbZpLbN5Jo4DYHL2Npn45YeAAeH2SCWq0iWJ19V2CNPMn6OX4ydBgaWPr73IEPNqICPpkXVYCrp5sxBp00kYGtG98z"
+      );
+
+      const session = await axios.get(
+        `http://localhost:8000/api/v1/order/checkout-session/${grandTotal}`,
+        {
+          headers: {
+            Authorization: `Bearer ${Cookies.get("JWT")}`,
+          },
+        }
+      );
+
+      await stripe.redirectToCheckout({
+        sessionId: session.data.session.id,
+      });
+    } catch (err) {
+      console.log(err.message);
+      alert("error", err.message);
+      setCheckout(false);
+    }
+  };
+
   const removeFromCart = async (cartId) => {
     const response = await axios({
       method: "post",
@@ -88,6 +119,13 @@ const Cart = () => {
           <h2 className="secondary-heading">Cart</h2>
           <p className="grand-total">
             Grand total: <strong>${grandTotal}</strong>
+            <button
+              className="btn btn-filled"
+              style={{ marginLeft: "3.2rem" }}
+              onClick={checkoutHandler}
+            >
+              {checkout ? "Processing..." : "Checkout"}
+            </button>
           </p>
         </div>
         <div className="cart-container">
@@ -101,6 +139,7 @@ const Cart = () => {
                   quantity={cartItem.quantity}
                   price={cartItem.product.price * cartItem.quantity}
                   removeCart={removeFromCart}
+                  image={cartItem.product.image}
                 />
               );
             })

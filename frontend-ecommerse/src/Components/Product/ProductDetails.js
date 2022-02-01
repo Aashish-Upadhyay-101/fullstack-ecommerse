@@ -3,7 +3,6 @@ import { useParams, Link } from "react-router-dom";
 import Cookies from "js-cookie";
 import UserContext from "../../store/auth-context";
 import "./Products.css";
-import productImage from "../../assets/images/electronics.jpeg";
 import axios from "axios";
 
 const ProductDetails = (props) => {
@@ -49,6 +48,8 @@ const ProductDetails = (props) => {
       console.log(e.message);
     }
   };
+
+  const productImage = `http://localhost:8000/${product.image}`;
 
   return (
     <section className="section-product-details">
