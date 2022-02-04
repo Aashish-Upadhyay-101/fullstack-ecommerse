@@ -9,6 +9,9 @@ const router = express.Router();
 router.post("/signup", authController.signup);
 router.post("/login", authController.login);
 
+router.post("/forgetpassword", userController.forgetPassword);
+// router.patch("/resetpassword/:token", userController.resetPassword);
+
 // router.post("/getuserfromcookie", userController.getCurrentUserById); // get user from cookie
 
 // below this all need to begin login to the action

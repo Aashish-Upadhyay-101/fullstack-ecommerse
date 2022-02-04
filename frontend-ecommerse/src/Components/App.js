@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import UserContext from "../store/auth-context";
 import Navbar from "./Navbar/Navbar";
 import "./App.css";
 import Hero from "./Body/Hero";
@@ -17,23 +18,15 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 function App(props) {
-  // const userContext = useContext(UserContext);
-  const [user, setUser] = useState();
+  const userContext = useContext(UserContext);
+
+  const [user, setUser] = useState("");
 
   useEffect(() => {
-    async function fetchUser() {
-      const response = await axios.get(
-        "http://localhost:8000/api/v1/user/myprofile",
-        {
-          headers: {
-            Authorization: `Bearer ${Cookies.get("JWT")}`,
-          },
-        }
-      );
-      setUser(response.data.user);
-    }
-    fetchUser();
-  }, [Cookies.get("JWT")]);
+    const getUser = JSON.parse(Cookies.get("User"));
+    setUser(getUser);
+    // console.log(user);
+  }, [setUser]);
 
   return (
     <div className="app">

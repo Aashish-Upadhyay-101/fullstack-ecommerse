@@ -10,7 +10,7 @@ const userReducer = (state, action) => {
   if (action.type === "LOGIN") {
     const user = action.currentUser;
     return {
-      user,
+      ...user,
       isLoggedIn: true,
     };
   } else if (action.type === "LOGOUT") {

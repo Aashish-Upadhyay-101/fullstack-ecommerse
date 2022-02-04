@@ -24,8 +24,6 @@ const app = express();
 
 app.use(express.static(`${__dirname}/uploads/products`));
 
-console.log(`${__dirname}/uploads/products`);
-
 app.use(cors());
 app.options("*", cors());
 
