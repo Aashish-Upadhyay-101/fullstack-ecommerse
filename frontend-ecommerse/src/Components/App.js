@@ -18,16 +18,6 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 function App(props) {
-  const userContext = useContext(UserContext);
-
-  const [user, setUser] = useState("");
-
-  useEffect(() => {
-    const getUser = JSON.parse(Cookies.get("User"));
-    setUser(getUser);
-    // console.log(user);
-  }, [setUser]);
-
   return (
     <div className="app">
       <AuthProvider>
