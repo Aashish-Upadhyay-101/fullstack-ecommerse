@@ -52,10 +52,6 @@ const Login = () => {
       path: "/",
     });
 
-    Cookies.set("User", JSON.stringify(currentUser), {
-      path: "/",
-    });
-
     setLoading(false);
     navigate("/");
   };
