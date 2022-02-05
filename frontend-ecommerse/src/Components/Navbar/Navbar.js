@@ -32,7 +32,7 @@ const Navbar = () => {
     if (userContext.isLoggedIn === true) {
       fetchCart();
     }
-  }, [cart]);
+  }, []);
 
   return (
     <nav className="navbar">
@@ -50,7 +50,11 @@ const Navbar = () => {
         </li>
       </div>
       <div className="navbar-center">
-        <input className="navbar-search" type="text" />
+        <input
+          className="navbar-search"
+          type="text"
+          placeholder="Search for products..."
+        />
         <ion-icon name="search-outline" id="icon"></ion-icon>
       </div>
       <div className="navbar-right">

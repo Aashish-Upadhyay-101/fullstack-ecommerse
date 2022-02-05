@@ -15,25 +15,11 @@ import Cart from "./Cart/Cart";
 import { useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
+import CreateProduct from "../Components/Seller/CreateProduct";
 
 function App(props) {
   // const userContext = useContext(UserContext);
-  const [user, setUser] = useState();
-
-  useEffect(() => {
-    async function fetchUser() {
-      const response = await axios.get(
-        "http://localhost:8000/api/v1/user/myprofile",
-        {
-          headers: {
-            Authorization: `Bearer ${Cookies.get("JWT")}`,
-          },
-        }
-      );
-      setUser(response.data.user);
-    }
-    fetchUser();
-  }, [Cookies.get("JWT")]);
+  // const [user, setUser] = useState();
 
   return (
     <div className="app">
@@ -73,6 +59,7 @@ function App(props) {
           <Route path="/logout" element={<Logout />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/cart" element={<Cart />} />
+          <Route path="/createproduct" element={<CreateProduct />} />
           <Route
             path="*"
             element={

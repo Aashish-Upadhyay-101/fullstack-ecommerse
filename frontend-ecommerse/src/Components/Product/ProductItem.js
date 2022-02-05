@@ -10,7 +10,7 @@ const ProductItem = ({ name, price, id, image }) => {
   return (
     <Link className="nav-link" to={link}>
       <figure className="product-item">
-        <img className="product-img" src={image_url} alt="product image" />{" "}
+        <img className="product-img" src={image_url} alt="product image" />
         {/* add image source later when source is available */}
         <div className="product-detail">
           <p className="product-title">{name}</p>

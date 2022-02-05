@@ -1,9 +1,12 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import hero from "../../assets/images/hero.jpeg";
+import UserContext from "../../store/auth-context";
 import "./Hero.css";
 
 const Hero = () => {
+  const userContext = useContext(UserContext);
+
   return (
     <section className="section-hero">
       <div className="hero container">
@@ -17,8 +20,15 @@ const Hero = () => {
             in discounted prices.
           </p>
 
-          <Link className="btn btn-filled" to="/signup">
-            Get started
+          <Link
+            className="btn btn-filled"
+            to={
+              userContext.user.role === "seller" ? "/createProduct" : "/signup"
+            }
+          >
+            {userContext.user.role === "seller"
+              ? "Sell product"
+              : "Get started"}
           </Link>
           <span className="btn explore">Explore more &#8595;</span>
         </div>

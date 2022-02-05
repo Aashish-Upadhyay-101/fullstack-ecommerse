@@ -10,7 +10,7 @@ router
   .get(productController.getProducts)
   .post(
     authController.protected,
-    authController.restrictUser("seller", "super-user", "buyer"),
+    authController.restrictUser("seller"),
     productController.uploadProductImage,
     productController.resizeImage,
     productController.createProduct
