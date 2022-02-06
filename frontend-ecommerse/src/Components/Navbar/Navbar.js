@@ -86,3 +86,6 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+// signpu,login, create new products if you are seller and you can buy products as buyer , stripe payment integration
+// search functionality is left and everything else is I think done for a ecommerse project
