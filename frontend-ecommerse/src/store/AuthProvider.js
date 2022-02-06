@@ -4,6 +4,7 @@ import { useReducer } from "react";
 const defaultUserState = {
   user: {},
   isLoggedIn: false,
+  filteredProduct: [],
 };
 
 const userReducer = (state, action) => {
@@ -19,6 +20,13 @@ const userReducer = (state, action) => {
     return {
       user,
       isLoggedIn: false,
+    };
+  }
+
+  if (action.type === "FILTER") {
+    return {
+      ...state,
+      filteredProduct: action.product,
     };
   }
 
@@ -39,11 +47,17 @@ const AuthProvider = (props) => {
     dispatchUserAction({ tyep: "LOGOUT" });
   };
 
+  const updateProduct = (product) => {
+    dispatchUserAction({ type: "FILTER", product: product });
+  };
+
   const userContext = {
     user: userState.user,
     isLoggedIn: userState.isLoggedIn,
     login: loginHandler,
     logout: logoutHandler,
+    filteredProduct: userState.filteredProduct,
+    updateFilteredProduct: updateProduct,
   };
 
   return (
