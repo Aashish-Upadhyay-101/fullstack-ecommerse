@@ -1,14 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import "./Products.css";
 import ProductItem from "./ProductItem";
+import UserContext from "../../store/auth-context";
 
-const Products = () => {
+const Products = (props) => {
   const params = useParams();
+  const userContext = useContext(UserContext);
 
-  const categroyTitle =
-    params.category.charAt(0).toUpperCase() + params.category.slice(1);
+  const categroyTitle = params.category;
+
+  // params.category.charAt(0).toUpperCase() + params.category.slice(1) ||
 
   const [product, setProduct] = useState([]);
 
@@ -21,8 +24,12 @@ const Products = () => {
       const products = response.data.product;
       setProduct(products);
     }
-    fetchProduct();
-  }, [categroyTitle]);
+    if (props.isSearching === true) {
+      setProduct(userContext.filteredProduct);
+    } else {
+      fetchProduct();
+    }
+  }, [categroyTitle, userContext.filteredProduct]);
 
   return (
     <section className="products">

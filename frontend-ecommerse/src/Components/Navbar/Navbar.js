@@ -6,9 +6,11 @@ import { Link } from "react-router-dom";
 import logo from "../../assets/images/tinder.png";
 import "./Navbar.css";
 
-const Navbar = () => {
+const Navbar = (props) => {
   const userContext = useContext(UserContext);
   const [cart, setCart] = useState([]);
+  const [product, setProduct] = useState([]);
+  const [search, setSearch] = useState("");
 
   let username = userContext.user.name || "guest";
 
@@ -32,7 +34,30 @@ const Navbar = () => {
     if (userContext.isLoggedIn === true) {
       fetchCart();
     }
+
+    async function fetchProduct() {
+      const response = await axios.get("http://localhost:8000/api/v1/product");
+      setProduct(response.data.product);
+    }
+
+    fetchProduct();
   }, []);
+
+  const searchHandler = (e) => {
+    setSearch(e.target.value);
+
+    const newFilteredProducts = product.filter((elem) => {
+      return elem.name.toLowerCase().includes(search.toLowerCase());
+    });
+
+    // console.log(newFilteredProducts);?
+
+    userContext.updateFilteredProduct(newFilteredProducts);
+
+    console.log(userContext.filteredProduct);
+
+    props.isSearched(search);
+  };
 
   return (
     <nav className="navbar">
@@ -54,6 +79,7 @@ const Navbar = () => {
           className="navbar-search"
           type="text"
           placeholder="Search for products..."
+          onChange={searchHandler}
         />
         <ion-icon name="search-outline" id="icon"></ion-icon>
       </div>

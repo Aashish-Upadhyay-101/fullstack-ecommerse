@@ -7,6 +7,9 @@ const UserContext = createContext({
   addToCart: () => {},
   login: (currentUser) => {},
   logout: () => {},
+  filteredProduct: [],
+
+  updateFilteredProduct: (product) => {},
 });
 
 export default UserContext;

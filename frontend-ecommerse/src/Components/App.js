@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import Navbar from "./Navbar/Navbar";
 import "./App.css";
 import Hero from "./Body/Hero";
@@ -16,10 +16,19 @@ import { useEffect } from "react";
 import axios from "axios";
 import Cookies from "js-cookie";
 import CreateProduct from "../Components/Seller/CreateProduct";
+import UserContext from "../store/auth-context";
 
 function App(props) {
-  // const userContext = useContext(UserContext);
-  // const [user, setUser] = useState();
+  const userContext = useContext(UserContext);
+  const [search, isSearch] = useState(false);
+
+  const isProductSearched = (searchedValue) => {
+    if (searchedValue.length > 1) {
+      isSearch(true);
+    } else {
+      isSearch(false);
+    }
+  };
 
   return (
     <div className="app">
@@ -29,9 +38,15 @@ function App(props) {
             path="/"
             element={
               <>
-                <Navbar />
-                <Hero />
-                <Category />
+                <Navbar isSearched={isProductSearched} />
+                {!search ? (
+                  <>
+                    <Hero />
+                    <Category />
+                  </>
+                ) : (
+                  <Products isSearching={search} />
+                )}
               </>
             }
           />
@@ -39,8 +54,8 @@ function App(props) {
             path="/category/:category"
             element={
               <>
-                <Navbar />
-                <Products />
+                <Navbar isSearched={isProductSearched} />
+                <Products isSearching={search} />
               </>
             }
           />
@@ -49,7 +64,7 @@ function App(props) {
             path="/category/:categroy/:productId"
             element={
               <>
-                <Navbar />
+                <Navbar isSearched={isProductSearched} />
                 <ProductDetails />
               </>
             }
